@@ -1,0 +1,33 @@
+#container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+#results {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  display: none;
+}
+
+.text {
+  font-size: 1em;
+  /* height: 60vh; */
+  width: 20vw;
+  /* transition: transform 0.03s linear; */
+}
+
+.text.inactive {
+  transition: transform 0.1s linear;
+}
+.hidden {
+  display: none;
+}
+#thing.inactive {
+  background-color: silver;
+}

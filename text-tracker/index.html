@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>clmtrackr face</title>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body touch-action="none">
+    <!-- Hidden video element for receiving camera stream -->
+    <video autoplay="true" style="display:none" id="camera" width="250"></video>
+
+    <!-- Canvas for giving visual feedback -->
+    <canvas class="hidden" style="opacity:0.5" id="canvas" width="250"></canvas>
+
+    <div id="results">
+      Rotation:
+      <span id="rotation">?</span>
+      <br />
+      Size:
+      <span id="size">?</span>
+      <br />
+      Tracking:
+      <span id="tracking">no</span>
+    </div>
+
+    <div id="container">
+      <div class="text">
+        <h1>Faceless Interaction</h1>
+        <p>
+          In the middle of the present struggle to keep interaction complexity
+          in check, as artifact complexity continues to rise and the technical
+          possibilities to interact multiply, the notion of interface is
+          scrutinized. First, a limited number of previous interpretations or
+          thought styles of the notion are identified and discussed. This serves
+          as a framework for an analysis of the current situation with regard to
+          complexity, control, and interaction, leading to a realization of the
+          crucial role of surface in contemporary understanding of interaction.
+          The potential of faceless interaction, interaction that transcends
+          traditional reliance on surfaces, is then examined and discussed,
+          liberating possibilities as well as complicating effects, and dangers
+          are pointed out, ending with a sketch of a possibly emerging new
+          thought style
+        </p>
+      </div>
+    </div>
+    <script src="../lib/clmtrackr.js"></script>
+    <script defer src="script.js"></script>
+  </body>
+</html>

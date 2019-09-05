@@ -1,0 +1,22 @@
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: darkslategray;
+  padding: 0;
+  margin: 0;
+}
+
+.wave {
+  width: 100%;
+  stroke: pink;
+  stroke-width: 0.5em;
+  fill: none;
+  stroke-miterlimit: 10;
+}
+.wave-line {
+  transition: all 0.1s;
+}

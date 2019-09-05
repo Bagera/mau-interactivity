@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>camera-diff</title>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body touch-action="none">
+    <!-- Video element for showing camera stream -->
+    <video style="display:none" autoplay="true" id="camera"></video>
+
+    <svg
+      class="wave"
+      data-name="Layer 1"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 256"
+    >
+      <path class="wave-line" d="M0,128 l512, 0" />
+    </svg>
+
+    <audio class="audio" src="./loop.mp3" autoplay loop></audio>
+
+    <canvas id="captureCanvas" style="display:none"></canvas>
+    <canvas id="offscreenCanvas" style="display:none"></canvas>
+  </body>
+</html>
