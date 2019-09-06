@@ -22,13 +22,6 @@ camera.addEventListener("play", () => {
   window.requestAnimationFrame(renderFrame);
 });
 
-function processImageData() {
-  let ctx = buffer.getContext("2d");
-
-  ctx.drawImage(camera, 0, 0);
-  let frame = offscreenC.getImageData(0, 0, buffer.width, buffer.height);
-}
-
 function renderWave(strength = 0, flip) {
   const waveWidth = 512;
   const pointCount = 50;
