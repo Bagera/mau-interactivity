@@ -7,6 +7,7 @@ const wave = document.querySelector(".wave-line");
 let flipWave = true;
 
 const audio = document.querySelector(".audio");
+let oldRate = 0;
 
 audio.addEventListener("play", () => {
   audio.playbackRate = 0;
@@ -46,11 +47,30 @@ function renderWave(strength = 0, flip) {
 }
 
 function setSoundSpeed(change) {
-  let rate = change / 15;
-  if (rate < 0.1) {
-    rate = 0;
+  let fudgeFactor = 5;
+  let rate = change / 20;
+  let rateChange = rate - oldRate;
+
+  let newRate = oldRate + rateChange / fudgeFactor;
+
+  if (newRate > 5) {
+    newRate = 5;
   }
-  audio.playbackRate = rate;
+
+  oldRate = newRate;
+  if (newRate < 0.1) {
+    newRate = 0;
+  }
+  if (rate < 0.1) {
+    if (audio.volume > 0) {
+      audio.volume = Math.max(0, audio.volume - 1 / fudgeFactor);
+    }
+  } else {
+    if (audio.volume < 1) {
+      audio.volume = Math.min(1, audio.volume + 1 / fudgeFactor);
+    }
+  }
+  audio.playbackRate = newRate;
 }
 
 function getFrameDiff(frameA, frameB) {
@@ -70,10 +90,7 @@ function getFrameDiff(frameA, frameB) {
   }
 
   // Give a numerical readout of proportion of pixels that have changed
-  relDiff = 100 - Math.floor(100 * (diffCount / totalPixels));
-  if (relDiff < 2) {
-    relDiff = 0;
-  }
+  relDiff = 100 - 100 * (diffCount / totalPixels);
   return relDiff;
 }
 
