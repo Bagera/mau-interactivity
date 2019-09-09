@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Soundscape</title>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="../lib/tfjs.js"></script>
+    <script defer src="../lib/coco-ssd.js"></script>
+    <script defer src="script.js"></script>
+  </head>
+
+  <body>
+    <!-- Video element for showing camera stream -->
+    <video
+      class="hidden"
+      autoplay="true"
+      id="camera"
+      width="256"
+      height="256"
+    ></video>
+
+    <audio class="audio" src="../assets/music.mp3" loop></audio>
+
+    <canvas id="canvas"></canvas>
+    <button id="btnFreeze">Freeze</button>
+  </body>
+</html>
