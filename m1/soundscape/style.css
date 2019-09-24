@@ -1,0 +1,26 @@
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--colorBg);
+  padding: 0;
+  margin: 0;
+}
+
+.camera {
+  display: none;
+}
+
+.canvas {
+  background-color: rgba(0, 0, 0, 0.25);
+  /* border: solid 0.5em var(--colorMain); */
+  width: auto;
+  height: 100vmin;
+}
+
+.loading .canvas {
+  display: none;
+}

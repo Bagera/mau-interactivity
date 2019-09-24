@@ -1,1 +1,16 @@
-assets/music.mp3
+// 3rd party modules
+node_modules/
+
+// Logs
+logs
+*.log
+npm-debug.log*
+
+// Editors
+.vscode
+
+// OS
+.DS_Store
+
+// Copyprotected material
+music.mp3

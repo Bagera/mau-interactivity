@@ -17,22 +17,28 @@
     <link rel="stylesheet" href="style.css" />
     <script defer src="../lib/tfjs.js"></script>
     <script defer src="../lib/coco-ssd.js"></script>
-    <script defer src="script.js"></script>
+    <script defer type="module" src="script.js"></script>
   </head>
 
-  <body>
+  <body class="loading">
     <!-- Video element for showing camera stream -->
     <video
-      class="hidden"
       autoplay="true"
       id="camera"
-      width="256"
-      height="256"
+      class="camera"
+      width="640"
+      height="480"
     ></video>
 
     <audio class="audio" src="../assets/music.mp3" loop></audio>
 
-    <canvas id="canvas"></canvas>
-    <button id="btnFreeze">Freeze</button>
+    <canvas id="canvas" class="canvas" width="640" height="480"></canvas>
+
+    <div class="loader">
+      <p class="loader-message">Loading</p>
+      <div class="loader-bar">
+        <div class="loader-indicator"></div>
+      </div>
+    </div>
   </body>
 </html>

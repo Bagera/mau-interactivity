@@ -1,0 +1,72 @@
+html {
+  box-sizing: border-box;
+  --colorBg: darkslategray;
+  --colorMain: pink;
+  --colorText: rgb(245, 240, 219);
+  --fontBody: monospace;
+
+  --dark: #403f4c;
+  --lightSpot: #e84855;
+  --spot: #3185fc;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+  color: var(--colorText);
+  background-color: var(--colorBg);
+  font-family: "Roboto Slab", serif;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+h1,
+h2 {
+  color: var(--colorMain);
+}
+a,
+a:link,
+a:visited {
+  color: var(--colorMain);
+}
+
+.loader {
+  display: none;
+}
+.loading .loader {
+  display: block;
+}
+
+.loader-message {
+  font-size: 10px;
+  font-family: monospace;
+}
+
+.loader-bar {
+  border: solid 0.25em var(--colorMain);
+  padding: 0.25em;
+  height: 2em;
+  width: 10em;
+}
+.loader-indicator {
+  background-color: var(--colorMain);
+  height: 1em;
+  width: 10%;
+  animation: animateX 1s ease-in-out infinite alternate;
+}
+
+@keyframes animateX {
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(900%);
+  }
+}
