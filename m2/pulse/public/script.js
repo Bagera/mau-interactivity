@@ -15,8 +15,20 @@ let step = 100;
 let beat = {
   active: true,
   spd: 60,
-  str: 1
+  str: 60,
+  atk: 50,
+  sus: 50
 };
+
+let controls = ["spd", "str", "atk", "sus"];
+
+function updateControls(selectors = controls) {
+  selectors.forEach(selector => {
+    const el = document.querySelector(`.Control-${selector}`);
+    el.querySelector(`.Control-value`).innerHTML = beat[selector];
+    el.querySelector(`input`).value = beat[selector];
+  });
+}
 
 function write(servo, pos) {
   const data = {
@@ -36,13 +48,15 @@ function write_micros(servo, pos) {
   socket.send(JSON.stringify(data));
 }
 
-function sendBeat({ active, spd, str }) {
+function sendBeat({ active, spd, str, atk, sus }) {
   const data = {
     cmd: CMD_BEAT,
     servo: 0,
     active,
     spd,
-    str
+    str,
+    atk,
+    sus
   };
   socket.send(JSON.stringify(data));
 }
@@ -58,6 +72,12 @@ function detach(servo) {
   );
 }
 
+function updateBeat(beat) {
+  console.log(beat);
+  updateControls();
+  sendBeat(beat);
+}
+
 window.onload = () => {
   // Emergency stop
 
@@ -66,49 +86,19 @@ window.onload = () => {
   const btnStartStop = document.querySelector("#btnStartStop");
   const btnSave = document.querySelector("#btnSave");
   const btnDelete = document.querySelector("#btnDelete");
-  const post = document.querySelector("#post");
 
-  post.oninput = evt => {
-    const postMsg = evt.target.value;
-    console.log(postMsg.length);
-  };
-
-  btnSave.onmouseover = evt => {
-    beat.spd -= 20;
-    sendBeat(beat);
-  };
-
-  btnSave.onmouseout = evt => {
-    beat.spd += 20;
-    sendBeat(beat);
-  };
-
-  btnDelete.onmouseover = evt => {
-    beat.str += 0.3;
-    sendBeat(beat);
-  };
-
-  btnDelete.onmouseout = evt => {
-    beat.str -= 0.3;
-    sendBeat(beat);
-  };
-
-  pulseSpeed.oninput = evt => {
-    beat.spd = evt.target.value;
-    console.log(beat);
-    sendBeat(beat);
-  };
-
-  pulseStrength.oninput = evt => {
-    beat.str = evt.target.value / 100;
-    console.log(beat);
-    sendBeat(beat);
-  };
+  controls.forEach(selector => {
+    const el = document.querySelector(`.Control-${selector} input`);
+    el.oninput = evt => {
+      beat[selector] = parseInt(evt.target.value);
+      updateBeat(beat);
+    };
+  });
 
   btnStartStop.onclick = evt => {
     beat.active = !beat.active;
     console.log(beat);
-    sendBeat(beat);
+    updateBeat(beat);
   };
 
   socket = new ReconnectingWebsocket("ws://" + location.host + "/serial");
@@ -120,4 +110,5 @@ window.onload = () => {
     console.log("Connected to json-serial-bridge 👍");
     detach(0);
   });
+  updateControls();
 };

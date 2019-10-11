@@ -19,35 +19,73 @@ let port = null;
 let angles = {
   rest: 1500,
   max: 90,
-  min: 40
+  min: 90
 };
 let beat = {
   beating: false,
   active: true,
   spd: 60,
-  str: 1
+  str: 60,
+  atk: 50,
+  sus: 50
 };
+let targetBeat = Object.assign({}, beat);
 let beatTimer;
 let pulseTimer;
 
-function setBeat(active, spd, str) {
-  beat = Object.assign(beat, { spd, str, active });
+function setBeat(beatJson) {
+  for (const key in targetBeat) {
+    if (targetBeat.hasOwnProperty(key) && beatJson.hasOwnProperty(key)) {
+      targetBeat[key] = beatJson[key];
+    }
+  }
+}
+
+function updateBeat() {
+  updatedBeat = Object.assign({}, beat);
+  for (const key in updatedBeat) {
+    if (updatedBeat.hasOwnProperty(key)) {
+      if (typeof updatedBeat[key] === "number" && key !== "atk") {
+        const diff = targetBeat[key] - updatedBeat[key];
+        if (diff > 0) {
+          updatedBeat[key] += Math.max(
+            Math.round(diff * (targetBeat.atk / 100)),
+            1
+          );
+        }
+        if (diff < 0) {
+          updatedBeat[key] += Math.min(
+            Math.round(diff * (targetBeat.atk / 100)),
+            -1
+          );
+        }
+      } else {
+        updatedBeat[key] = targetBeat[key];
+      }
+    }
+  }
+  console.log(updatedBeat);
+  beat = Object.assign({}, updatedBeat);
 }
 
 function doBeat() {
   if (beat.active && !beat.beating) {
     beat.beating = true;
+
+    updateBeat();
+
     write_micros(0, angles.rest);
     beatTimer = setTimeout(() => {
-      write_micros(0, angles.rest - angles.min * beat.str);
+      write_micros(0, angles.rest - angles.min * (beat.str / 100));
       beatTimer = setTimeout(() => {
-        write_micros(0, angles.rest + angles.max * beat.str);
+        write_micros(0, angles.rest + angles.max * (beat.str / 100));
         beatTimer = setTimeout(() => {
           write_micros(0, angles.rest);
           clearTimeout(beatTimer);
-        }, 100);
-      }, 100);
-    }, 100);
+          beatTimer = null;
+        }, beat.sus * 2);
+      }, beat.sus * 2);
+    }, beat.sus * 2);
     pulseTimer = setTimeout(() => {
       beat.beating = false;
       doBeat();
@@ -58,6 +96,7 @@ function doBeat() {
     clearTimeout(beatTimer);
   }
 }
+
 function write_micros(servo, pos) {
   const msg = {
     cmd: 1,
@@ -133,8 +172,13 @@ function bridgePorts(program) {
       }
 
       if (json.cmd === 4) {
-        setBeat(json.active, json.spd, json.str);
-        doBeat();
+        setBeat(json);
+        console.log(json);
+        if (!beat.active) {
+          beat.active = json.beat;
+          targetBeat.active = json.beat;
+          doBeat();
+        }
       } else {
         toSerial(msg);
       }

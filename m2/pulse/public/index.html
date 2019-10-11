@@ -5,24 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Pulse</title>
+    <link rel="stylesheet" href="style.css" />
     <script defer src="../reconnecting-websocket.js"></script>
     <script src="script.js" type="module" defer></script>
   </head>
   <body>
-    <button id="btnStartStop">start/stop</button>
-    <input type="range" min="30" max="180" name="speed" id="speed" value="60" />
-    <input
-      type="range"
-      min="25"
-      max="100"
-      name="strength"
-      id="strength"
-      value="75"
-    />
-    <br />
-    <textarea name="post" id="post" cols="30" rows="10"></textarea>
-    <br />
-    <button id="btnSave">save</button>
-    <button id="btnDelete">delete</button>
+    <main>
+      <div class="Control Control-spd">
+        <label>
+          Interval <span class="Control-value"></span>
+          <input
+            type="range"
+            min="30"
+            max="180"
+            name="spd"
+            id="speed"
+            value="60"
+          />
+        </label>
+      </div>
+      <div class="Control">
+        <label class="Control-str">
+          Strength <span class="Control-value"></span>
+          <input
+            type="range"
+            min="0"
+            max="100"
+            name="str"
+            id="strength"
+            value="75"
+          />
+        </label>
+      </div>
+      <div class="Control">
+        <label class="Control-atk">
+          Attack <span class="Control-value"></span>
+          <input
+            type="range"
+            min="0"
+            max="100"
+            name="atk"
+            id="strength"
+            value="75"
+          />
+        </label>
+      </div>
+      <div class="Control">
+        <label class="Control-sus">
+          Beat length <span class="Control-value"></span>
+          <input
+            type="range"
+            min="0"
+            max="100"
+            name="sus"
+            id="sustain"
+            value="75"
+          />
+        </label>
+      </div>
+
+      <div class="Control Control-play">
+        <button id="btnStartStop">start/stop</button>
+      </div>
+    </main>
   </body>
 </html>
