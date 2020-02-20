@@ -1,0 +1,26 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Gesture capture</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <script
+    type="text/javascript"
+    src="./../../node_modules/socket.io-client/dist/socket.io.js"
+  ></script>
+  <script src="record-client.js"></script>
+
+  <body>
+    <div id="page-container">
+      <div id="header"></div>
+      <div id="touch-pad">
+        <button id="start-session" onclick="startSession()">
+          Start session
+        </button>
+      </div>
+      <footer id="footer">start</footer>
+    </div>
+  </body>
+</html>

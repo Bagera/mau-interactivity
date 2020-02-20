@@ -1,6 +1,10 @@
 // 3rd party modules
 node_modules/
 
+// local data
+data/
+model/
+
 // Logs
 logs
 *.log
